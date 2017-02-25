@@ -30,7 +30,10 @@ import UIKit
 public protocol QRCodeReaderDisplayable {
   /// The view that display video as it is being captured by the camera.
   var cameraView: UIView { get }
-
+    
+    /// A label to display info message
+    var informationLabel: UILabel? { get }
+    
   /// A cancel button.
   var cancelButton: UIButton? { get }
 
@@ -50,7 +53,7 @@ public protocol QRCodeReaderDisplayable {
    - Parameter showSwitchCameraButton: Flag to know whether you should display the switch camera button.
    - Parameter showTorchButton: Flag to know whether you should display the toggle torch button.
    */
-  func setupComponents(showCancelButton: Bool, showSwitchCameraButton: Bool, showTorchButton: Bool, showOverlayView: Bool)
+    func setupComponents(showCancelButton: Bool, showSwitchCameraButton: Bool, showTorchButton: Bool, showOverlayView: Bool, showInformationLabel: Bool)
 }
 
 /// The `QRCodeReaderContainer` structure embed the view displayed by the controller. The embeded view must be conform to the `QRCodeReaderDisplayable` protocol.
@@ -70,7 +73,7 @@ public struct QRCodeReaderContainer {
 
   // MARK: - Convenience Methods
 
-  func setupComponents(showCancelButton: Bool, showSwitchCameraButton: Bool, showTorchButton: Bool, showOverlayView: Bool) {
-    displayable.setupComponents(showCancelButton: showCancelButton, showSwitchCameraButton: showSwitchCameraButton, showTorchButton: showTorchButton, showOverlayView: showOverlayView)
+  func setupComponents(showCancelButton: Bool, showSwitchCameraButton: Bool, showTorchButton: Bool, showOverlayView: Bool, showInformationLabel: Bool) {
+    displayable.setupComponents(showCancelButton: showCancelButton, showSwitchCameraButton: showSwitchCameraButton, showTorchButton: showTorchButton, showOverlayView: showOverlayView, showInformationLabel: showInformationLabel)
   }
 }

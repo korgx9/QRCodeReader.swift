@@ -38,6 +38,8 @@ public class QRCodeReaderViewController: UIViewController {
   let showSwitchCameraButton: Bool
   let showTorchButton: Bool
   let showOverlayView: Bool
+    let showInformationLabel: Bool
+    var informationLabelText: String?
 
   // MARK: - Managing the Callback Responders
 
@@ -68,6 +70,12 @@ public class QRCodeReaderViewController: UIViewController {
     showSwitchCameraButton = builder.showSwitchCameraButton
     showTorchButton        = builder.showTorchButton
     showOverlayView        = builder.showOverlayView
+    showInformationLabel    = builder.showInformationLabel
+    informationLabelText    = builder.informationLabelText
+    
+        
+        
+//        = builder.informationLabelText
 
     super.init(nibName: nil, bundle: nil)
 
@@ -91,7 +99,7 @@ public class QRCodeReaderViewController: UIViewController {
       }
     }
     
-    setupUIComponentsWithCancelButtonTitle(builder.cancelButtonTitle)
+    setupUIComponentsWithCancelButtonTitle(builder.cancelButtonTitle, informationLabelText: informationLabelText)
 
     NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
   }
@@ -104,6 +112,7 @@ public class QRCodeReaderViewController: UIViewController {
     showTorchButton        = false
     showSwitchCameraButton = false
     showOverlayView        = false
+    showInformationLabel    = false
 
     super.init(coder: aDecoder)
   }
@@ -145,13 +154,13 @@ public class QRCodeReaderViewController: UIViewController {
 
   // MARK: - Initializing the AV Components
 
-  private func setupUIComponentsWithCancelButtonTitle(_ cancelButtonTitle: String) {
+    private func setupUIComponentsWithCancelButtonTitle(_ cancelButtonTitle: String, informationLabelText: String? = nil) {
     view.addSubview(readerView.view)
 
     let sscb = showSwitchCameraButton && codeReader.hasFrontDevice
     let stb  = showTorchButton && codeReader.isTorchAvailable
 
-    readerView.setupComponents(showCancelButton: showCancelButton, showSwitchCameraButton: sscb, showTorchButton: stb, showOverlayView: showOverlayView)
+    readerView.setupComponents(showCancelButton: showCancelButton, showSwitchCameraButton: sscb, showTorchButton: stb, showOverlayView: showOverlayView, showInformationLabel: showInformationLabel)
 
     // Setup action methods
 
@@ -159,7 +168,8 @@ public class QRCodeReaderViewController: UIViewController {
     readerView.displayable.toggleTorchButton?.addTarget(self, action: #selector(toggleTorchAction), for: .touchUpInside)
     readerView.displayable.cancelButton?.setTitle(cancelButtonTitle, for: .normal)
     readerView.displayable.cancelButton?.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
-
+    readerView.displayable.informationLabel?.text = informationLabelText
+        
     // Setup camera preview layer
     codeReader.previewLayer.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
 

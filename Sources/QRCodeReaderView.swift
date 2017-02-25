@@ -27,6 +27,18 @@
 import UIKit
 
 final class QRCodeReaderView: UIView, QRCodeReaderDisplayable {
+    /// A label to display info message
+    public var informationLabel: UILabel? = {
+        let il = UILabel()
+        
+        il.translatesAutoresizingMaskIntoConstraints = false
+        il.textColor = UIColor.white
+        il.numberOfLines = 0
+        il.textAlignment = .center
+        
+        return il
+    }()
+    
   lazy var overlayView: UIView? = {
     let ov = ReaderOverlayView()
 
@@ -71,7 +83,7 @@ final class QRCodeReaderView: UIView, QRCodeReaderDisplayable {
     return ttb
   }()
 
-  func setupComponents(showCancelButton: Bool, showSwitchCameraButton: Bool, showTorchButton: Bool, showOverlayView: Bool) {
+  func setupComponents(showCancelButton: Bool, showSwitchCameraButton: Bool, showTorchButton: Bool, showOverlayView: Bool, showInformationLabel: Bool) {
     translatesAutoresizingMaskIntoConstraints = false
 
     addComponents()
@@ -80,11 +92,11 @@ final class QRCodeReaderView: UIView, QRCodeReaderDisplayable {
     switchCameraButton?.isHidden = !showSwitchCameraButton
     toggleTorchButton?.isHidden  = !showTorchButton
     overlayView?.isHidden        = !showOverlayView
+    informationLabel?.isHidden    = !showInformationLabel
 
-    guard let cb = cancelButton, let scb = switchCameraButton, let ttb = toggleTorchButton, let ov = overlayView else { return }
+    guard let cb = cancelButton, let scb = switchCameraButton, let ttb = toggleTorchButton, let ov = overlayView, let il = informationLabel else { return }
 
-    let views = ["cv": cameraView, "ov": ov, "cb": cb, "scb": scb, "ttb": ttb]
-
+    let views = ["cv": cameraView, "ov": ov, "cb": cb, "scb": scb, "ttb": ttb, "il": informationLabel] as [String : Any]
     addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[cv]|", options: [], metrics: nil, views: views))
 
     if showCancelButton {
@@ -103,6 +115,11 @@ final class QRCodeReaderView: UIView, QRCodeReaderDisplayable {
     if showTorchButton {
       addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[ttb(50)]", options: [], metrics: nil, views: views))
       addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[ttb(70)]", options: [], metrics: nil, views: views))
+    }
+    
+    if showInformationLabel {
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-125-[il]", options: [], metrics: nil, views: views))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[il]-20-|", options: [], metrics: nil, views: views))
     }
 
     for attribute in Array<NSLayoutAttribute>([.left, .top, .right, .bottom]) {
@@ -153,6 +170,10 @@ final class QRCodeReaderView: UIView, QRCodeReaderDisplayable {
 
     if let cb = cancelButton {
       addSubview(cb)
+    }
+    
+    if let il = informationLabel {
+        addSubview(il)
     }
   }
 }

@@ -79,7 +79,16 @@ public final class QRCodeReaderViewControllerBuilder {
   */
   public var showOverlayView = true
     
+    /**
+     Flag to display the guide view.
+     */
+    public var showInformationLabel = true
 
+    /**
+     The title to use for the cancel button.
+     */
+    public var informationLabelText: String? = nil
+    
   // MARK: - Initializing a Flap View
 
   /**

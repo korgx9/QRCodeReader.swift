@@ -32,9 +32,9 @@ public final class ReaderOverlayView: UIView {
     var overlay             = CAShapeLayer()
     overlay.backgroundColor = UIColor.clear.cgColor
     overlay.fillColor       = UIColor.clear.cgColor
-    overlay.strokeColor     = UIColor.white.cgColor
+    overlay.strokeColor     = UIColor.yellow.cgColor
     overlay.lineWidth       = 3
-    overlay.lineDashPattern = [7.0, 7.0]
+    overlay.lineDashPattern = [1.0, 1.0]
     overlay.lineDashPhase   = 0
 
     return overlay
@@ -64,7 +64,7 @@ public final class ReaderOverlayView: UIView {
   }
   
   public override func draw(_ rect: CGRect) {
-    var innerRect = rect.insetBy(dx: 50, dy: 50)
+    var innerRect = rect.insetBy(dx: 50, dy: 70)
     let minSize   = min(innerRect.width, innerRect.height)
 
     if innerRect.width != minSize {
