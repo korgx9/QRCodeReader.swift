@@ -118,7 +118,7 @@ final class QRCodeReaderView: UIView, QRCodeReaderDisplayable {
     }
     
     if showInformationLabel {
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-125-[il]", options: [], metrics: nil, views: views))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-120-[il]", options: [], metrics: nil, views: views))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[il]-20-|", options: [], metrics: nil, views: views))
     }
 
