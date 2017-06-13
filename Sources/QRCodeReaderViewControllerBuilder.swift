@@ -89,10 +89,10 @@ public final class QRCodeReaderViewControllerBuilder {
    */
   public var handleOrientationChange = true
     
-    /**
-     The title to use for the cancel button.
-     */
-    public var informationLabelText: String? = nil
+  /**
+   The title to use for the cancel button.
+  */
+  public var informationLabelText: String? = nil
     
   // MARK: - Initializing a Flap View
 
