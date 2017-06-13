@@ -75,6 +75,11 @@ public final class QRCodeReaderViewControllerBuilder {
   public var showTorchButton = false
 
   /**
+   Flag to display the guide view.
+   */
+  public var showOverlayView = true
+
+  /**
     Flag to display the guide view.
   */
   public var showOverlayView = true
