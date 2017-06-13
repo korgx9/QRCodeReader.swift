@@ -38,8 +38,9 @@ public class QRCodeReaderViewController: UIViewController {
   let showSwitchCameraButton: Bool
   let showTorchButton: Bool
   let showOverlayView: Bool
-    let showInformationLabel: Bool
-    var informationLabelText: String?
+  let showInformationLabel: Bool
+  var informationLabelText: String?
+  let handleOrientationChange: Bool
 
   // MARK: - Managing the Callback Responders
 
@@ -72,10 +73,7 @@ public class QRCodeReaderViewController: UIViewController {
     showOverlayView        = builder.showOverlayView
     showInformationLabel    = builder.showInformationLabel
     informationLabelText    = builder.informationLabelText
-    
-        
-        
-//        = builder.informationLabelText
+    handleOrientationChange = builder.handleOrientationChange
 
     super.init(nibName: nil, bundle: nil)
 
@@ -113,6 +111,7 @@ public class QRCodeReaderViewController: UIViewController {
     showSwitchCameraButton = false
     showOverlayView        = false
     showInformationLabel    = false
+    handleOrientationChange = false
 
     super.init(coder: aDecoder)
   }

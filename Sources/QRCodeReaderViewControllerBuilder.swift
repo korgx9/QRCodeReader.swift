@@ -82,13 +82,13 @@ public final class QRCodeReaderViewControllerBuilder {
   /**
     Flag to display the guide view.
   */
-  public var showOverlayView = true
+  public var showInformationLabel = true
     
-    /**
-     Flag to display the guide view.
-     */
-    public var showInformationLabel = true
-
+  /**
+   Flag to display the guide view.
+   */
+  public var handleOrientationChange = true
+    
     /**
      The title to use for the cancel button.
      */
